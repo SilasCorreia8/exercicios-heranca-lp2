@@ -3,10 +3,10 @@ package exercicio2;
 public class JogoDigital extends Jogos{
     
     private String plataforma;
-    private int tamanhoDow;
+    private double tamanhoDow;
     
     public JogoDigital(String nome, int classificacao, double desconto,
-            double preco, String plataforma, int tamanhoDow) {
+            double preco, String plataforma, double tamanhoDow) {
         
         super(nome, classificacao, desconto, preco);
         this.plataforma = plataforma;
@@ -21,11 +21,11 @@ public class JogoDigital extends Jogos{
         this.plataforma = plataforma;
     }
 
-    public int getTamanhoDow() {
+    public double getTamanhoDow() {
         return tamanhoDow;
     }
 
-    public void setTamanhoDow(int tamanhoDow) {
+    public void setTamanhoDow(double tamanhoDow) {
         this.tamanhoDow = (tamanhoDow < 0) ? 0: tamanhoDow;
     }
     
@@ -36,13 +36,13 @@ public class JogoDigital extends Jogos{
         
     }
     
-    public String toSting() {
+    @Override
+    public String toString() {
         
-        return String.format("%s \n%s: %s\n%s: %s\n%s: %.2f", 
+        return String.format("%s \n%s: %s\n%s: %.1f", 
                 super.toString(),
                 "Plataforma", plataforma,
-                "Download (GB)", tamanhoDow,
-                "Total a Pagar", calcPrecoTotal());
+                "Download (GB)", tamanhoDow);
         
     }
     

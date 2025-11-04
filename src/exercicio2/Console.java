@@ -32,11 +32,18 @@ public class Console extends Jogos{
         this.tamanhoGB = (tamanhoGB < 0) ? 0: tamanhoGB;
     }
 
+    public double calculaPrecoTotal() {
+        return super.calcPrecoTotal();
+    }
+    
     @Override
     public String toString() {
         
-        return String.format("%s \n", 
-                super.toString());
+        return String.format("%s \n%s\n%s: %s\n%s: %.1f", 
+                "Jogo",
+                super.toString(),
+                "Marca", marca,
+                "Tamanho(GB)", tamanhoGB);
         
     }
     

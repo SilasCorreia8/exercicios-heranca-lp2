@@ -18,6 +18,7 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      */
     public Principal() {
+        super("Jogos");
         initComponents();
     }
 
@@ -48,6 +49,10 @@ public class Principal extends javax.swing.JFrame {
         platafornaTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         tamanhoTextField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        marcaTextField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        tempoEntregaTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,10 +105,27 @@ public class Principal extends javax.swing.JFrame {
 
         buttonGroup1.add(consoleRadioButton);
         consoleRadioButton.setText("Console");
+        consoleRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consoleRadioButtonActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Plataforma:");
 
+        platafornaTextField.setEnabled(false);
+
         jLabel6.setText("Tamanho (GB):");
+
+        tamanhoTextField.setEnabled(false);
+
+        jLabel7.setText("Marca:");
+
+        marcaTextField.setEnabled(false);
+
+        jLabel8.setText("Tempo Entrega (dias)");
+
+        tempoEntregaTextField.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,7 +161,15 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tamanhoTextField)))
+                                .addComponent(tamanhoTextField))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(marcaTextField))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tempoEntregaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
@@ -172,19 +202,24 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(descText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(descText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(marcaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(precoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(precoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(tempoEntregaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jogosRadioButton)
-                    .addComponent(jgDigitaisRadioButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(consoleRadioButton)
                         .addComponent(aplicarButton)
-                        .addComponent(jgFisicosRadioButton)))
+                        .addComponent(jgFisicosRadioButton))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jogosRadioButton)
+                        .addComponent(jgDigitaisRadioButton)))
                 .addContainerGap(136, Short.MAX_VALUE))
         );
 
@@ -201,8 +236,38 @@ public class Principal extends javax.swing.JFrame {
             jgDig.setClassificacao(Integer.parseInt(classifcText.getText()));
             jgDig.setDesconto(Double.parseDouble(descText.getText()));
             jgDig.setPreco(Double.parseDouble(precoText.getText()));
+            jgDig.setPlataforma(platafornaTextField.getText());
+            jgDig.setTamanhoDow(Double.parseDouble(tamanhoTextField.getText()));
 
             JOptionPane.showMessageDialog(null, jgDig.toString());
+            
+            
+        } else if(jgFisicosRadioButton.isSelected()){
+            
+            JogoFisico jgFisc = new JogoFisico("" ,0, 0, 0, 0);
+        
+            jgFisc.setNome(nameText.getText());
+            jgFisc.setClassificacao(Integer.parseInt(classifcText.getText()));
+            jgFisc.setDesconto(Double.parseDouble(descText.getText()));
+            jgFisc.setPreco(Double.parseDouble(precoText.getText()));
+            jgFisc.setTempoEntrega(Integer.parseInt(tempoEntregaTextField.getText()));
+
+            JOptionPane.showMessageDialog(null, jgFisc.toString());
+            
+            
+        } else if(consoleRadioButton.isSelected()){
+            
+            Console cons = new Console("", 0, 0, 0, "", 0);
+        
+            cons.setNome(nameText.getText());
+            cons.setClassificacao(Integer.parseInt(classifcText.getText()));
+            cons.setDesconto(Double.parseDouble(descText.getText()));
+            cons.setPreco(Double.parseDouble(precoText.getText()));
+            cons.setMarca(marcaTextField.getText());
+            cons.setTamanhoGB(Double.parseDouble(tamanhoTextField.getText()));
+            cons.setMarca(marcaTextField.getText());
+            
+            JOptionPane.showMessageDialog(null, cons.toString());
             
             
         } else {
@@ -217,6 +282,14 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, jogo.toString());
         }
         
+        nameText.setText("");
+        classifcText.setText("");
+        descText.setText("");
+        precoText.setText("");
+        platafornaTextField.setText("");
+        tamanhoTextField.setText("");
+        marcaTextField.setText("");
+        tempoEntregaTextField.setText("");
         
     }//GEN-LAST:event_aplicarButtonActionPerformed
 
@@ -226,6 +299,10 @@ public class Principal extends javax.swing.JFrame {
         classifcText.setEnabled(true);
         descText.setEnabled(true);
         precoText.setEnabled(true);
+        tempoEntregaTextField.setEnabled(false);
+        platafornaTextField.setEnabled(false);
+        tamanhoTextField.setEnabled(false);
+        marcaTextField.setEnabled(false);
         
     }//GEN-LAST:event_jogosRadioButtonActionPerformed
 
@@ -235,6 +312,11 @@ public class Principal extends javax.swing.JFrame {
         classifcText.setEnabled(true);
         descText.setEnabled(false);
         precoText.setEnabled(true);
+        tempoEntregaTextField.setEnabled(false);
+        platafornaTextField.setEnabled(true);
+        tamanhoTextField.setEnabled(true);
+        marcaTextField.setEnabled(false);
+        
     }//GEN-LAST:event_jgDigitaisRadioButtonActionPerformed
 
     private void jgFisicosRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jgFisicosRadioButtonActionPerformed
@@ -242,7 +324,22 @@ public class Principal extends javax.swing.JFrame {
         classifcText.setEnabled(true);
         descText.setEnabled(true);
         precoText.setEnabled(true);
+        tempoEntregaTextField.setEnabled(true);
+        platafornaTextField.setEnabled(false);
+        tamanhoTextField.setEnabled(false);
+        marcaTextField.setEnabled(false);
     }//GEN-LAST:event_jgFisicosRadioButtonActionPerformed
+
+    private void consoleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consoleRadioButtonActionPerformed
+        descText.setText("10");
+        nameText.setEnabled(true);
+        classifcText.setEnabled(true);
+        descText.setEnabled(false);
+        precoText.setEnabled(true);
+        platafornaTextField.setEnabled(false);
+        tamanhoTextField.setEnabled(true);
+        marcaTextField.setEnabled(true);
+    }//GEN-LAST:event_consoleRadioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,12 +378,16 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JRadioButton jgDigitaisRadioButton;
     private javax.swing.JRadioButton jgFisicosRadioButton;
     private javax.swing.JRadioButton jogosRadioButton;
+    private javax.swing.JTextField marcaTextField;
     private javax.swing.JTextField nameText;
     private javax.swing.JTextField platafornaTextField;
     private javax.swing.JTextField precoText;
     private javax.swing.JTextField tamanhoTextField;
+    private javax.swing.JTextField tempoEntregaTextField;
     // End of variables declaration//GEN-END:variables
 }
