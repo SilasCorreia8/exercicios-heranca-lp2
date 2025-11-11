@@ -41,13 +41,25 @@ public class Funcionario {
     }
     
     //Calculo para aumento salarial
-    public double aumentoSalarial() {
-        return this.salario = this.salario + (1+(getAumento()/100)); 
+    public double aumentoSalarial(double aument) {
+        return this.salario = (this.salario * (1+(aument/100))); 
     }
     
     //Calculo para salario anual
     public double salarioAnual() {
         return getSalario() * 13;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s: %s\n%s: %.2f\n%s: %s\n%s: %.2f\n%s: %.2f",
+                "Nome", this.nome,
+                "Salario", this.salario,
+                "Aumento", this.aumento,
+                "Salario Atualizado", aumentoSalarial(getAumento()),
+                "Salario Anual", salarioAnual());
+    }
+    
+    
     
 }
