@@ -44,6 +44,10 @@ public class Principal extends javax.swing.JFrame {
         turnoComboBox = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         adicionalNoturnoTextField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        bonusTextField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        matriculaTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,9 +59,19 @@ public class Principal extends javax.swing.JFrame {
 
         buttonGroup1.add(assTecRadioButton);
         assTecRadioButton.setText("Assistente Tecnico");
+        assTecRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assTecRadioButtonActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(assAdminRadioButton);
         assAdminRadioButton.setText("Assistente Administrativo");
+        assAdminRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assAdminRadioButtonActionPerformed(evt);
+            }
+        });
 
         aplicarButton.setText("Aplicar");
         aplicarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -66,11 +80,22 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Turno");
+        jLabel4.setText("Turno:");
 
         turnoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Matutino", "Vespertino", "Noturno" }));
+        turnoComboBox.setEnabled(false);
 
-        jLabel5.setText("Adicional Noturno");
+        jLabel5.setText("Adicional Noturno:");
+
+        adicionalNoturnoTextField.setEnabled(false);
+
+        jLabel6.setText("Bonus:");
+
+        bonusTextField.setEnabled(false);
+
+        jLabel7.setText("Matricula:");
+
+        matriculaTextField.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,17 +109,22 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(assTecRadioButton)
                     .addComponent(turnoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(aplicarButton))
+                    .addComponent(aplicarButton)
+                    .addComponent(jLabel6)
+                    .addComponent(bonusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(assAdminRadioButton)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(matriculaTextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(adicionalNoturnoTextField)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(salarioTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
@@ -129,9 +159,17 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(turnoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(adicionalNoturnoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bonusTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(matriculaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(aplicarButton)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addGap(52, 52, 52))
         );
 
         pack();
@@ -140,6 +178,16 @@ public class Principal extends javax.swing.JFrame {
     private void aplicarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarButtonActionPerformed
         
         if(assTecRadioButton.isSelected()) {
+              
+            AssistenteTec assTec = new AssistenteTec("", 0.0, 0, 0.0, 0);
+            
+            assTec.setNome(nameTextField.getText());
+            assTec.setSalario(Double.parseDouble(salarioTextField.getText()));
+            assTec.setAumento(Integer.parseInt(aumentoTextField.getText()));
+            assTec.setBonus(Double.parseDouble(bonusTextField.getText()));
+            assTec.setMatricula(Integer.parseInt(matriculaTextField.getText()));
+            
+            JOptionPane.showMessageDialog(null, assTec.toString());
             
         } else if(assAdminRadioButton.isSelected()) {
         
@@ -154,7 +202,7 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, assAdm.toString());
             
         } else {
-            
+
             Funcionario func = new Funcionario("", 0.0, 0);
 
             func.setNome(nameTextField.getText());
@@ -165,6 +213,23 @@ public class Principal extends javax.swing.JFrame {
         
         }
     }//GEN-LAST:event_aplicarButtonActionPerformed
+
+    private void assTecRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assTecRadioButtonActionPerformed
+
+        bonusTextField.setEnabled(true);
+        matriculaTextField.setEnabled(true);
+        turnoComboBox.setEnabled(false);
+        adicionalNoturnoTextField.setEnabled(false);
+        
+    }//GEN-LAST:event_assTecRadioButtonActionPerformed
+
+    private void assAdminRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assAdminRadioButtonActionPerformed
+            
+        bonusTextField.setEnabled(false);
+        matriculaTextField.setEnabled(false);
+        turnoComboBox.setEnabled(true);
+        adicionalNoturnoTextField.setEnabled(true);
+    }//GEN-LAST:event_assAdminRadioButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,12 +262,16 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButton assAdminRadioButton;
     private javax.swing.JRadioButton assTecRadioButton;
     private javax.swing.JTextField aumentoTextField;
+    private javax.swing.JTextField bonusTextField;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField matriculaTextField;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JTextField salarioTextField;
     private javax.swing.JComboBox<String> turnoComboBox;
